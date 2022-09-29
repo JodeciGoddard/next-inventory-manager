@@ -1,0 +1,53 @@
+.container {
+    /* background-color: red; */
+    width: 100%;
+    max-width: 100%;
+}
+
+.container table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    border-width: 1px;
+    font-family: "Roboto", "Segoe UI", "GeezaPro", "DejaVu Serif", "sans-serif", "-apple-system", "BlinkMacSystemFont";
+}
+
+
+.container table tr th {
+    background-color: #fff;
+    border-color: #e0e0e0;
+    user-select: none;
+    box-sizing: border-box;
+    border-style: solid;
+    font-size: 12px;
+    font-weight: 500;
+    height: 42px;
+    overflow: hidden;
+    padding: 0 21px 0;
+    position: relative;
+    text-align: left;
+    color: rgba(0, 0, 0, .54);
+}
+
+.container tr td {
+    border-top: 1px solid #e0e0e0;
+    padding: 8px 25px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: table-cell;
+    font-size: 13px;
+    line-height: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    width: auto;
+}
+
+.lightHover:hover {
+    cursor: pointer;
+    background-color: #e0e0e0;
+}
+
+.darkHover:hover {
+    cursor: pointer;
+    background-color: #3b3b3b;
+}

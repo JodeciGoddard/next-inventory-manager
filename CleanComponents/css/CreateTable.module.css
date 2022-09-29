@@ -1,0 +1,129 @@
+.container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.card {
+    background-color: white;
+    width: 680px;
+    height: 100vh;
+    float: right;
+    max-height: 100%;
+    overflow-x: auto;
+}
+
+.cardHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-left: 1rem;
+    user-select: none;
+}
+
+.cardHeadingText {
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-family: "Open Sans", sans-serif;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    color: rgb(156 163 175);
+    font-weight: 400;
+    user-select: none;
+}
+
+.inputContainer input {
+    outline: none;
+    border: 1px solid #e0e0e0;
+    width: 60%;
+    padding: 0.6rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: rgb(75 85 99);
+    font-weight: 600;
+}
+
+.inputContainer input:focus {
+    border-color: #bbbbbb;
+}
+
+.colTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px soild black;
+}
+
+.colTable th {
+    padding: 0.4rem 0;
+    text-align: left;
+    margin: 0;
+    min-width: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgb(156 163 175);
+    user-select: none;
+}
+
+.colTable td {
+    padding: 0.2rem 0;
+}
+
+.fixedRow {
+    background-color: #e0e0e0;
+}
+
+.colTable td input {
+    outline: none;
+    border: 1px solid #e0e0e0;
+    padding: 0.6rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: rgb(75 85 99);
+    font-weight: 600;
+    width: 99%;
+    user-select: none;
+}
+
+.colTable td input:focus {
+    border-color: #bbbbbb;
+}
+
+
+.tableButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tableButton:hover {
+    opacity: 0.8;
+}
+
+.rounded {
+    background-color: #e0e0e0;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.unrounded {
+    background-color: #e0e0e0;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.rounded svg {
+    margin: auto;
+}
