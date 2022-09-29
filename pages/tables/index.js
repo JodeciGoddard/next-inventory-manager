@@ -62,7 +62,8 @@ const Tables = ({ data, user }) => {
 
     return (
         <>
-            <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl dark:bg-secondary-dark-bg">
+            <div className="m-2 md:m-10 sm:mt-14 sm:ml-4 sm:p-4 p-2 md:p-10 bg-white 
+      rounded-3xl dark:bg-secondary-dark-bg">
                 <Header
                     title="Tables"
                     category="Page"

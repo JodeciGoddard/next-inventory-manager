@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
 
-import { Header } from '../../components'
+import { Header, Button } from '../../components'
 import { withPageAuth, supabaseServerClient, getUser } from '@supabase/auth-helpers-nextjs';
-import { TableContainer } from '../../CleanComponents'
+import { TableContainer, CreateRow } from '../../CleanComponents'
 import { useStateContext } from '../../contexts/ContextProvider';
 import { useRouter } from 'next/router';
-import { table } from '@syncfusion/ej2-react-grids';
+
 
 const CustomTable = ({ data, user }) => {
 
-    const { currentMode } = useStateContext();
+    const { currentMode, currentColor } = useStateContext();
     let router = useRouter();
 
     const [tableName, setTableName] = useState('');
     const [tableSchema, setTableSchema] = useState([]);
     const [tableData, setTableData] = useState([]);
+
+    const [addContext, setAddContext] = useState(false);
+
+    const toggleAdd = () => {
+        setAddContext(prev => !prev);
+    }
 
     const onRowClick = (id) => {
 
@@ -52,7 +58,7 @@ const CustomTable = ({ data, user }) => {
             setTableSchema(temp_sch);
             setTableData(data_array);
 
-            console.log('data ', data_array);
+            // console.log('data ', data_array);
 
 
         }
@@ -62,11 +68,23 @@ const CustomTable = ({ data, user }) => {
 
     return (
         <>
-            {user && <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl dark:bg-secondary-dark-bg">
+            {user && <div className="m-2 md:m-10 sm:mt-14 sm:ml-4 sm:p-4 p-2 md:p-10 bg-white 
+      rounded-3xl dark:bg-secondary-dark-bg">
                 <Header
                     title={tableName}
                     category="Table"
                 />
+
+                <div className='mb-5'>
+                    <Button
+                        color="white"
+                        bgColor={currentColor}
+                        text="Insert Row"
+                        borderRadius="10px"
+                        size="sm"
+                        onClick={toggleAdd}
+                    />
+                </div>
 
                 <TableContainer
                     headerData={tableSchema}
@@ -79,6 +97,7 @@ const CustomTable = ({ data, user }) => {
                 />
 
             </div>}
+            {addContext && <CreateRow user={user} onCancel={toggleAdd} />}
         </>
     );
 }
