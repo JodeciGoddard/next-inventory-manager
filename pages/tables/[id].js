@@ -15,6 +15,7 @@ const CustomTable = ({ data, user }) => {
     const [tableName, setTableName] = useState('');
     const [tableSchema, setTableSchema] = useState([]);
     const [tableData, setTableData] = useState([]);
+    const [columns, setColumns] = useState([]);
 
     const [addContext, setAddContext] = useState(false);
 
@@ -30,8 +31,13 @@ const CustomTable = ({ data, user }) => {
     useEffect(() => {
         if (user && data) {
             let result = data[0];
-            let table_columns = result.table_columns;
+            let table_columns = result?.table_columns;
             let temp_sch = [];
+
+            if (!table_columns) {
+                router.push('/tables');
+                return;
+            };
 
             //create table schema
             for (let col of table_columns) {
@@ -57,6 +63,7 @@ const CustomTable = ({ data, user }) => {
             setTableName(result.name);
             setTableSchema(temp_sch);
             setTableData(data_array);
+            setColumns(table_columns)
 
             // console.log('data ', data_array);
 
@@ -97,7 +104,7 @@ const CustomTable = ({ data, user }) => {
                 />
 
             </div>}
-            {addContext && <CreateRow user={user} onCancel={toggleAdd} />}
+            {addContext && <CreateRow user={user} onCancel={toggleAdd} columns={columns} />}
         </>
     );
 }

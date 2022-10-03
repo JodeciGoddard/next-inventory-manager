@@ -24,3 +24,45 @@
     margin-left: 1rem;
     user-select: none;
 }
+
+.cardHeadingText {
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-family: "Open Sans", sans-serif;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    color: rgb(156 163 175);
+    font-weight: 400;
+    user-select: none;
+}
+
+.inputContainer input {
+    outline: none;
+    border: 1px solid #e0e0e0;
+    width: 60%;
+    padding: 0.7rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: rgb(75 85 99);
+    font-weight: 600;
+    height: min-content;
+}
+
+.inputContainer input:focus {
+    border-color: #bbbbbb;
+}
+
+.inputContainer div label {
+    font-size: 0.9rem;
+}
+
+.small {
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
+    color: rgb(189, 189, 189);
+}
