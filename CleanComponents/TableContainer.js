@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './css/TableContainer.module.css'
+import { BiEdit } from 'react-icons/bi';
 
 
-const CreateTableRow = ({ data, columnHeaders, textColor, borderColor, darkHover, onClick }) => {
+const CreateTableRow = ({ data, columnHeaders, textColor, borderColor, darkHover, onClick, editable, onEdit }) => {
     const cx = {
         color: textColor ? textColor : '',
         borderColor: borderColor ? borderColor : ''
@@ -10,16 +11,17 @@ const CreateTableRow = ({ data, columnHeaders, textColor, borderColor, darkHover
     return (
         <tr
             className={darkHover ? styles.darkHover : styles.lightHover}
-            onClick={onClick}
         >
+            {
+                editable ? <td onClick={() => onEdit(data)} className={styles.edit}><BiEdit /></td> : null
+            }
             {columnHeaders.map((header, index) => {
-
                 if (header.template) {
-                    return <td style={cx} key={index}> {header.template(data)} </td>
+                    return <td style={cx} key={index} onClick={onClick}> {header.template(data)} </td>
                 }
 
                 return (
-                    <td style={cx} key={index}>
+                    <td style={cx} key={index} onClick={onClick}>
                         {data[header.field]}
                     </td>
                 )
@@ -28,7 +30,7 @@ const CreateTableRow = ({ data, columnHeaders, textColor, borderColor, darkHover
     )
 }
 
-const TableContainer = ({ tableData, headerData, cssClasses, borderColor, headerTextColor, textColor, darkHover, rowClick }) => {
+const TableContainer = ({ tableData, headerData, cssClasses, borderColor, headerTextColor, textColor, darkHover, rowClick, editable, onEdit }) => {
 
     const cx = {
         borderColor: borderColor ? borderColor : '',
@@ -39,6 +41,9 @@ const TableContainer = ({ tableData, headerData, cssClasses, borderColor, header
             <table>
                 <thead>
                     <tr>
+                        {
+                            editable ? <th style={{ width: '50px', textAlign: 'center' }}>Edit</th> : null
+                        }
                         {
                             headerData && headerData.map(item => {
                                 const s = {
@@ -67,6 +72,8 @@ const TableContainer = ({ tableData, headerData, cssClasses, borderColor, header
                                 borderColor={borderColor}
                                 darkHover={darkHover}
                                 onClick={() => { rowClick(tbData.id) }}
+                                editable={editable}
+                                onEdit={onEdit}
                             />
                         )
                     }

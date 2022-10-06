@@ -59,6 +59,10 @@ const Tables = ({ data, user }) => {
         router.push(`/tables/${id}`);
     }
 
+    const onEditRow = (item) => {
+        console.log('data to edit', item);
+    }
+
 
     return (
         <>
@@ -90,6 +94,8 @@ const Tables = ({ data, user }) => {
                         headerTextColor={currentMode === 'Dark' ? "#e5e7eb" : ''}
                         darkHover={currentMode === 'Dark' ? true : false}
                         rowClick={onRowClick}
+                        editable={true}
+                        onEdit={onEditRow}
                     />
                 }
 

@@ -52,3 +52,13 @@
     cursor: pointer;
     background-color: #3b3b3b;
 }
+
+.edit svg {
+    font-size: 1.3rem;
+    color: rgb(55, 65, 81);
+}
+
+.edit svg:hover {
+    opacity: 0.6;
+    user-select: none;
+}
