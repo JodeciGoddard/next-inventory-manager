@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ordersData, ordersGrid } from '../../data/dummy';
 import { Header } from '../../components'
 import { withPageAuth, supabaseServerClient, getUser } from '@supabase/auth-helpers-nextjs';
-import { TableContainer } from '../../CleanComponents'
+import { EditTable, TableContainer } from '../../CleanComponents'
 import { useStateContext } from '../../contexts/ContextProvider';
 import { useRouter } from 'next/router';
 
@@ -14,9 +14,15 @@ const Tables = ({ data, user }) => {
 
     const { currentMode, currentColor } = useStateContext();
     const [addContext, setAddContext] = useState(false);
+    const [editContext, setEditContext] = useState(false);
+    const [selectedItem, setSelectedItem] = useState({});
 
     const toggleAdd = () => {
         setAddContext(prev => !prev);
+    }
+
+    const toggleEdit = () => {
+        setEditContext(prev => !prev);
     }
 
 
@@ -61,6 +67,8 @@ const Tables = ({ data, user }) => {
 
     const onEditRow = (item) => {
         console.log('data to edit', item);
+        setSelectedItem(item);
+        setEditContext(true);
     }
 
 
@@ -103,6 +111,13 @@ const Tables = ({ data, user }) => {
 
             </div>
             {addContext && <CreateTable user={user} onCancel={toggleAdd} />}
+            {editContext && <EditTable
+                user={user}
+                data={selectedItem}
+                onCancel={toggleEdit}
+                target="user_tables"
+                fields={['name', 'description']}
+            />}
         </>
     );
 }
