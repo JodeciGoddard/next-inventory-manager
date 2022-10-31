@@ -183,13 +183,17 @@ const CreateTable = ({ onCancel, user }) => {
 
             if (res2) {
                 onCancel();
-                router.reload(window.location.pathname);
+                refreshData()
                 //console.log('created column res: ', res2);
             }
 
         }
 
 
+    }
+
+    const refreshData = () => {
+        router.replace(router.asPath)
     }
 
     return (

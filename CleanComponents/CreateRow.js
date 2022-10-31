@@ -106,14 +106,16 @@ const CreateRow = ({ onCancel, user, columns }) => {
 
             if (res) {
                 onCancel();
-                router.reload(window.location.pathname);
+                refreshData()
             }
 
         }
 
     }
 
-    // console.log('test col: ', columns)
+    const refreshData = () => {
+        router.replace(router.asPath)
+    }
 
     return (
         <div className={styles.container}>

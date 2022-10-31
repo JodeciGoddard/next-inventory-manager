@@ -129,6 +129,7 @@ export const getServerSideProps = withPageAuth({
         const { data } = await supabaseServerClient(ctx)
             .from('user_tables')
             .select('*')
+            .eq('is_archived', false)
         const { user } = await getUser(ctx);
         return { props: { user, data } }
     },

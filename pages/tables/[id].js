@@ -118,6 +118,7 @@ export const getServerSideProps = withPageAuth({
             .from('user_tables')
             .select(`name, table_columns(*, column_data(*) )`)
             .eq('id', id)
+            .eq('table_columns.is_archived', false)
         const { user } = await getUser(ctx);
         return { props: { user, data } }
     },

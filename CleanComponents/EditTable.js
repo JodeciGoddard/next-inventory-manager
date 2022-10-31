@@ -3,11 +3,16 @@ import styles from './css/EditTable.module.css';
 import { MdOutlineCancel } from 'react-icons/md';
 import { useStateContext } from '../contexts/ContextProvider';
 import { Button } from '../components';
+import { supabaseClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/router';
 
 const EditTable = ({ onCancel, data, target, fields }) => {
 
     const { currentColor } = useStateContext();
     const [state, setState] = useState({});
+    const [error, setError] = useState('');
+
+    const router = useRouter();
 
     useEffect(() => {
         setState(data);
@@ -15,14 +20,68 @@ const EditTable = ({ onCancel, data, target, fields }) => {
 
     const onInputUpdate = e => {
         setState(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        setError('')
     }
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
+
+        //validate name
+        if (state.name.trim() === '') {
+            setError('Table must have a name')
+            return;
+        }
+
+        let payload = {
+            name: state.name,
+            description: state.description
+        }
+
+        const { data: res, err } = await supabaseClient
+            .from('user_tables')
+            .update(payload)
+            .eq('id', data.id)
+
+        if (err) {
+            setError(err.message);
+            return
+        }
+
+        if (res) {
+            onCancel()
+            refreshData()
+        }
 
     }
 
-    const onRemove = () => {
+    const onRemove = async () => {
+        let con = confirm('Are you sure you wish to delete this table?');
 
+        if (!con) {
+            return
+        }
+
+        let payload = {
+            is_archived: true
+        }
+
+        const { data: res, err } = await supabaseClient
+            .from('user_tables')
+            .update(payload)
+            .eq('id', data.id)
+
+        if (err) {
+            setError(err.message);
+            return
+        }
+
+        if (res) {
+            onCancel()
+            refreshData()
+        }
+    }
+
+    const refreshData = () => {
+        router.replace(router.asPath)
     }
 
     return (
@@ -96,6 +155,10 @@ const EditTable = ({ onCancel, data, target, fields }) => {
                         />
                     </div>
                 </div>
+
+                {error !== '' && <div className='p-4 text-sm text-red-400 font-bold'>
+                    <p>Error: {error}</p>
+                </div>}
 
             </div>
         </div>
